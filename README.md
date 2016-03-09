@@ -1,4 +1,4 @@
-#Validate your domain using the [Universal Links Validator](https://branch.io/resources/universal-links/)#
+##Validate your domain using the [Universal Links Validator](https://branch.io/resources/universal-links/)##
 
 The [first version of this tool](https://github.com/shortstuffsushi/Universal-Link-Validator) was created by Graham, a previous Branch employee. He understood the pain that developers were going through when confirming to Apple's requirements of hosting the apple-app-site-association. Our version of the tool is largely built on his open-source framework, but takes a few more aspects of apple-app-site-association into consideration.
 
@@ -12,11 +12,11 @@ As a result, the Universal Links Validator tool will test for the following when
 
 3. That your apple-app-site-association file's 'content-type' header is set to one of the following MIME types:
 
-* application/pkcs7-mime
-* application/octet-stream
-* application/json
-* text/json
-* text/plain
+  * application/pkcs7-mime
+  * application/octet-stream
+  * application/json
+  * text/json
+  * text/plain
 
 4. The fact that your server does not return an error code greater than or equal to 400.
 
