@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US" ng-app="UniversalLinkValidator" class="ng-scope">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Universal Links Validator | Branch</title>
+
+    <meta name="keywords" content="Universal links, universal links checker, universal links validator, apple-app-site-association">
+    <meta name="description" content="Branch’s Universal Links Validator analyzes your site to check if your apple-app-site-association is properly hosted for Universal Links.">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="//branch.io/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="//branch.io/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="//branch.io/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="//branch.io/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="//branch.io/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="//branch.io/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="//branch.io/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="//branch.io/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="icon" type="image/png" href="//branch.io/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="//branch.io/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="//branch.io/img/favicon/favicon-32x32.png" sizes="32x32">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
+    <meta name="msapplication-TileColor" content="#65d3f7">
+    <meta name="msapplication-TileImage" content="//branch.io/img/favicon/mstile-144x144.png">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+
+  </head>
+
+  <body ng-controller="MainController">
+    <nav class="navbar navbar-default navbar-static-top navbar-main">
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">
+            <a href="https://branch.io" class="logo-container">
+              <div class="branch-logo"><img src="https://branch.io/img/logo_white.png" alt="BranchMetrics" title="Branch Metrics"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="ng-scope" ng-view>
+      <div class="container">
+        <div class="well form-horizontal col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+          <div class="validator-title">Universal Links Validator</div>
+          <p>
+          Enter your domain below to test if your website is properly configured for Universal Links. We’ll test your domain against Apple’s requirements for hosting your Apple App Site Association file along with what we have seen in production that leads to a successful implementation of Universal Links. Properly setting it up is a critical step in ensuring that your Universal Links work properly so you’re able to give your iOS users the best possible experience.  <br/><br/>
+
+          In addition to your domain, enter your Apple App Prefix and Bundle Identifier to validate that the correct values from your project are present. If your apple-app-site-association file is properly formatted, we’ll return it for you. If not, we’ll show you which tests failed or did not run due to a previous failed test.
+          </p>
+          <br/><br/>
+          <div class="form-group">
+            <label class="col-sm-3 control-label input-required">Domain / Web Page</label>
+            <div class="col-sm-9 no-space">
+              <input class="form-control" ng-model="domainInputVal" type="text" ng-keyup="keyUp($event)" ng-blur="cleanDomain($event)" placeholder="jet.com">
+            </div>
+            <div class="form-group">
+            <label class="col-sm-3 control-label" ng-show="domainInputVal" ng-cloak>Apple App Prefix</label>
+            <div class="col-sm-9 no-space" ng-show="domainInputVal" ng-cloak>
+              <input class="form-control" ng-model="teamIdentifier" type="text" ng-keyup="keyUp($event)" placeholder="Optional">
+            </div>
+          </div>
+            <label class="col-sm-3 control-label" ng-show="domainInputVal" ng-cloak>Bundle Identifier </label>
+            <div class="col-sm-9 no-space" ng-show="domainInputVal" ng-cloak>
+              <input class="form-control" ng-model="bundleIdentifier" type="text" ng-keyup="keyUp($event)" placeholder="Optional">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9 no-space">
+             <button class="new-button" ng-click="beginTest()">Test</button>
+              <button class="new-button" ng-show="showresultsvalue" ng-click="scrollTo()">Results</button>
+             </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div ng-repeat="(domain, results) in domains" ng-cloak id="resultsbox">
+          <div class="alert alert-success" ng-if="aasaIsEntirelyValid(results)">
+            <b>{{ domain }}</b> -- This domain validates, JSON format is valid, and the Bundle and Apple App Prefixes match (if provided). <br> Below you’ll find a list of tests that were run and a copy of your apple-app-site-association file:<br/><br/>
+            <ul class="list-group" ng-if="isEmpty(results.errors)">
+              <li hidden></li>
+              <li class="list-group-item list-group-item-success">
+                <span class="glyphicon glyphicon-ok" ></span>
+                {{ displayMessage('badDns', didErrorOccur='success_without_congrats') }}
+              </li>
+              <li class="list-group-item  list-group-item-success">
+                <span class="glyphicon glyphicon-ok"></span>
+                {{ displayMessage('httpsFailure', didErrorOccur=false) }}
+              </li>
+              <li class="list-group-item  list-group-item-success">
+                <span class="glyphicon glyphicon-ok"></span>
+                {{ displayMessage('serverError', didErrorOccur=false) }}
+              </li>
+              <li class="list-group-item  list-group-item-success">
+                <span class="glyphicon glyphicon-ok"></span>
+                {{ displayMessage('badContentType', didErrorOccur=false) }}
+              </li>
+              <li class="list-group-item  list-group-item-success">
+                <span class="glyphicon glyphicon-ok"></span>
+                {{ displayMessage('invalidJson', didErrorOccur=false) }}
+              </li>
+              <li hidden></li>
+            </ul>
+            <pre>{{ prettyPrintAASA(results.aasa) }}</pre>
+
+          </div>
+          <div class="alert alert-warning" ng-if="aasaValidButIdentfiersDontMatch(results)">
+            <b>{{ domain }}</b> -- This domain has a valid AASA, but does not contain provided Bundle / Apple App Prefix Identifiers. Bundle information can be found in the General tab for your build target in Xcode. App Prefix information can be found on your Apple Developer Account on the App IDs page.<br/><br/>
+            <pre>{{ prettyPrintAASA(results.aasa) }}</pre>
+          </div>
+          <div class="alert alert-warning" ng-if="aasaValidButFormatInvalid(results)">
+            <b>{{ domain }}</b> -- This domain's AASA was pulled, but the JSON format seems Invalid. Please reach out to <a href="mailto:support@branch.io" target="_blank"> support@branch.io </a> <br/><br/>
+            <pre>{{ prettyPrintAASA(results.aasa) }}</pre>
+          </div>
+          <ul class="list-group" ng-if="!isEmpty(results.errors)">
+            <li class="list-group-item list-group-item-danger"><b>{{ domain }}</b> – This domain has some validation issues
+            </li>
+            <li class="list-group-item list-group-item-danger" ng-if="results.errors.errorOutOfScope">A request to this domain failed.
+            </li>
+            <li class="list-group-item {{ listGroupItemClassForValue(results.errors.badDns) }}" ng-if="!results.errors.errorOutOfScope">
+              <span class="glyphicon {{ glyphiconClassForValue(results.errors.badDns) }}"></span>
+              {{ displayMessage('badDns', results.errors.badDns) }}
+            </li>
+            <li class="list-group-item {{ listGroupItemClassForValue(results.errors.httpsFailure) }} clickable-result">
+              <span class="glyphicon {{ glyphiconClassForValue(results.errors.httpsFailure) }}"></span>
+              {{ displayMessage('httpsFailure', results.errors.httpsFailure) }}
+              <a href="https://dev.branch.io/getting-started/dashboard-guide/#setting-a-custom-link-domain" target="_blank">Learn More</a>
+            </li>
+            <li class="list-group-item {{ listGroupItemClassForValue(results.errors.serverError) }} clickable-result">
+              <span class="glyphicon {{ glyphiconClassForValue(results.errors.serverError) }}"></span>
+               {{ displayMessage('serverError', results.errors.serverError) }}
+               <a href="https://www.addedbytes.com/articles/for-beginners/http-status-codes" target="_blank">Learn More</a>
+            </li>
+            <li  class="list-group-item {{ listGroupItemClassForValue(results.errors.badContentType) }}">
+              <span class="glyphicon {{ glyphiconClassForValue(results.errors.badContentType) }}"></span>
+              {{ displayMessage('badContentType', results.errors.badContentType) }}
+            </li>
+             <li  class="list-group-item {{ listGroupItemClassForValue(results.errors.invalidJson) }} clickable-result">
+              <span class="glyphicon {{ glyphiconClassForValue(results.errors.invalidJson) }}"></span> {{ displayMessage('invalidJson', results.errors.invalidJson) }}
+              <a href="http://jsonlint.com/" target="_blank">Learn More</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <h6 class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">Disclaimer: This product is not affiliated with Apple. It utilizes code, with permission from the author, of an open-source repo found <a href ="https://github.com/shortstuffsushi/Universal-Link-Validator" target="_blank">here</a>. If you have questions about the tool, or encounter an issue with your Universal Links setup, please contact <a href="mailto:support@branch.io">support@branch.io</a>.</h6>
+      </div>
+    </main>
+    <section class="section-get-started text-center" ng-show="showresultsvalue">
+        <h1 class="text-xs-2">Take the pain out of Universal Links. Start using Branch.</h1>
+        <a href="https://dashboard.branch.io/?utm_campaign=Universal%20Links%20Validator&utm_medium=CTA&utm_source=Validator%20Tool" class="new-button">Get Started</a>
+    </section>
+
+    <script src="static/js/factories/DomainFactory.js"></script>
+    <script src="static/js/controllers/MainController.js"></script>
+    <script src="static/js/index.js"></script>
+  </body>
+</html>
