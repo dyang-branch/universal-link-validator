@@ -1,4 +1,3 @@
-var newrelic = require('newrelic');
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
