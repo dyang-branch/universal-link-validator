@@ -35,8 +35,7 @@ app.post('/resources/universal-links/domain/:domain', function (httpReq, httpRes
             httpResp.status(200).json(respObj);
         })
         .catch(function(errorObj) {
-            console.log(errorObj);
-            
+
             if(errorObj.serverError || errorObj.errorOutOfScope){
                 
                 // check for file at another location
