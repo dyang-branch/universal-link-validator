@@ -23,14 +23,38 @@ app.post('/resources/universal-links/domain/:domain', function (httpReq, httpRes
     var bundleIdentifier = httpReq.query.bundleIdentifier;
     var teamIdentifier = httpReq.query.teamIdentifier;
     var respObj = { domains: { } };
+    
+    var cleanedDomain = domain.replace(/https?:\/\//, '');
+    cleanedDomain = cleanedDomain.replace(/\/.*/, '');
 
-    return checkDomain(domain, bundleIdentifier, teamIdentifier)
+    var fileUrl = 'https://' + cleanedDomain + '/apple-app-site-association';
+
+    return checkDomain(fileUrl, bundleIdentifier, teamIdentifier)
         .then(function(results) {
             respObj.domains[domain] = results;
-
             httpResp.status(200).json(respObj);
         })
         .catch(function(errorObj) {
+            console.log(errorObj);
+            
+            if(errorObj.serverError || errorObj.errorOutOfScope){
+                
+                // check for file at another location
+               
+                fileUrl = 'https://' + cleanedDomain + '/.well-known/apple-app-site-association';
+                return checkDomain(fileUrl,bundleIdentifier,teamIdentifier)
+                    .then(function(results){
+                        respObj.domains[domain] = results;
+                        httpResp.status(200).json(respObj);
+                    }).catch(function(errorObj){
+                        
+                        respObj.domains[domain] = { errors: errorObj };
+                        httpResp.status(400).json(respObj);
+                        
+                    })
+                
+            }
+
             respObj.domains[domain] = { errors: errorObj };
 
             httpResp.status(400).json(respObj);
