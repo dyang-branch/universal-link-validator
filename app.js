@@ -27,34 +27,25 @@ app.post('/resources/universal-links/domain/:domain', function (httpReq, httpRes
     var cleanedDomain = domain.replace(/https?:\/\//, '');
     cleanedDomain = cleanedDomain.replace(/\/.*/, '');
 
-    var fileUrl = 'https://' + cleanedDomain + '/apple-app-site-association';
+    var fileUrl = 'https://' + cleanedDomain + 'xx/apple-app-site-association';
     return checkDomain(fileUrl, bundleIdentifier, teamIdentifier)
         .then(function(results) {
             respObj.domains[domain] = results;
             httpResp.status(200).json(respObj);
         })
         .catch(function(errorObj) {
-            var propertiesInErrorObjExist = false;
-            for (var p in errorObj){
-                propertiesInErrorObjExist = true;
-                break;
-            }
-            if(propertiesInErrorObjExist){
-                
-                // check for file at another location
-               
-                fileUrl = 'https://' + cleanedDomain + '/.well-known/apple-app-site-association';
-                return checkDomain(fileUrl,bundleIdentifier,teamIdentifier)
-                    .then(function(results){
-                        respObj.domains[domain] = results;
-                        httpResp.status(200).json(respObj);
-                    }).catch(function(errorObj){
-                        
-                        respObj.domains[domain] = { errors: errorObj };
-                        httpResp.status(400).json(respObj);
-                        
-                    })
-                
+            if(errorObj.serverError || errorObj.errorOutOfScope || errorObj.badDns || errorObj.httpsFailure){
+                    fileUrl = 'https://' + cleanedDomain + '/.well-known/apple-app-site-association';
+                    return checkDomain(fileUrl,bundleIdentifier,teamIdentifier)
+                        .then(function(results){
+                            respObj.domains[domain] = results;
+                            httpResp.status(200).json(respObj);
+                        }).catch(function(errorObj){
+                            
+                            respObj.domains[domain] = { errors: errorObj };
+                            httpResp.status(400).json(respObj);
+                            
+                        })
             }
 
             respObj.domains[domain] = { errors: errorObj };
