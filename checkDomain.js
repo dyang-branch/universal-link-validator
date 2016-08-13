@@ -99,13 +99,8 @@ function _evaluateAASA(content, bundleIdentifier, teamIdentifier, encrypted) {
     });
 }
 
-function _checkDomain(domain, bundleIdentifier, teamIdentifier) {
-    // Clean up domains, removing scheme and path
-    var cleanedDomain = domain.replace(/https?:\/\//, '');
-    cleanedDomain = cleanedDomain.replace(/\/.*/, '');
-
-    var fileUrl = 'https://' + cleanedDomain + '/apple-app-site-association';
-
+function _checkDomain(fileUrl, bundleIdentifier, teamIdentifier) {
+   
     return new B(function(resolve, reject) {
         var errorObj = { };
 
@@ -128,9 +123,12 @@ function _checkDomain(domain, bundleIdentifier, teamIdentifier) {
                     else {
                         errorObj.errorOutOfScope = true;
                     }
+                  
                     reject(errorObj);
                 }
                 else {
+                    
+                   
                     errorObj.badDns = false;
                     errorObj.httpsFailure = false;
 
@@ -144,6 +142,7 @@ function _checkDomain(domain, bundleIdentifier, teamIdentifier) {
                     // Bad server response
                     if (res.status >= 400) {
                         errorObj.serverError = true;
+                        // Check here for alternate URL
                         reject(errorObj);
                     }
 
