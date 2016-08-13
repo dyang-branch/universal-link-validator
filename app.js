@@ -28,15 +28,18 @@ app.post('/resources/universal-links/domain/:domain', function (httpReq, httpRes
     cleanedDomain = cleanedDomain.replace(/\/.*/, '');
 
     var fileUrl = 'https://' + cleanedDomain + '/apple-app-site-association';
-
     return checkDomain(fileUrl, bundleIdentifier, teamIdentifier)
         .then(function(results) {
             respObj.domains[domain] = results;
             httpResp.status(200).json(respObj);
         })
         .catch(function(errorObj) {
-
-            if(errorObj.serverError || errorObj.errorOutOfScope){
+            var propertiesInErrorObjExist = false;
+            for (var p in errorObj){
+                propertiesInErrorObjExist = true;
+                break;
+            }
+            if(propertiesInErrorObjExist){
                 
                 // check for file at another location
                
