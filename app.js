@@ -27,7 +27,7 @@ app.post('/resources/universal-links/domain/:domain', function (httpReq, httpRes
     var cleanedDomain = domain.replace(/https?:\/\//, '');
     cleanedDomain = cleanedDomain.replace(/\/.*/, '');
 
-    var fileUrl = 'https://' + cleanedDomain + 'xx/apple-app-site-association';
+    var fileUrl = 'https://' + cleanedDomain + '/apple-app-site-association';
     return checkDomain(fileUrl, bundleIdentifier, teamIdentifier)
         .then(function(results) {
             respObj.domains[domain] = results;
