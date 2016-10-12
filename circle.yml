@@ -1,0 +1,25 @@
+---
+machine:
+  node:
+    version: 4.2.4
+  services:
+    - docker
+  environment:
+    BRANCH_STACK: node
+
+dependencies:
+  pre:
+    - cd && git clone https://github.com/BranchMetrics/deploy.git
+  override:
+    - ~/deploy/docker/build.sh
+
+test:
+  override:
+    # assumes the latest image is built
+
+deployment:
+  all:
+    branch: [master,production]
+    commands:
+      - ~/deploy/docker/deploy.sh
+
