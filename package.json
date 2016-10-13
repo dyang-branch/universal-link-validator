@@ -5,7 +5,7 @@
   "description": "A simple tool for testing your apple-app-site-association setup. This tool was originally created by Graham Mueller.",
   "author": "support@branch.io",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "bluebird": "^2.9.34",
