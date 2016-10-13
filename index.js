@@ -15,8 +15,8 @@ var app = express();
 var uploadDir = 'tmp-app-files';
 var upload = multer({ dest: uploadDir });
 
-app.use('/resources/universal-links/static', express.static('static'));
-app.use('/resources/universal-links', express.static('static'));
+app.use('/resources/universal-links/static', express.static(__dirname + '/static'));
+app.use('/resources/universal-links', express.static(__dirname + '/static'));
 
 app.post('/resources/universal-links/domain/:domain', function (httpReq, httpResp) {
     var domain = httpReq.params.domain;
