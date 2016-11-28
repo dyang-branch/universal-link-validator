@@ -15,15 +15,15 @@ var app = express();
 var uploadDir = 'tmp-app-files';
 var upload = multer({ dest: uploadDir });
 
-app.use('/resources/universal-links/static', express.static(__dirname + '/static'));
-app.use('/resources/universal-links', express.static(__dirname + '/static'));
+app.use('/resources/aasa-validator/static', express.static(__dirname + '/static'));
+app.use('/resources/aasa-validator', express.static(__dirname + '/static'));
 
-app.post('/resources/universal-links/domain/:domain', function (httpReq, httpResp) {
+app.post('/resources/aasa-validator/domain/:domain', function (httpReq, httpResp) {
     var domain = httpReq.params.domain;
     var bundleIdentifier = httpReq.query.bundleIdentifier;
     var teamIdentifier = httpReq.query.teamIdentifier;
     var respObj = { domains: { } };
-    
+
     var cleanedDomain = domain.replace(/https?:\/\//, '');
     cleanedDomain = cleanedDomain.replace(/\/.*/, '');
 
@@ -41,10 +41,10 @@ app.post('/resources/universal-links/domain/:domain', function (httpReq, httpRes
                             respObj.domains[domain] = results;
                             httpResp.status(200).json(respObj);
                         }).catch(function(errorObj){
-                            
+
                             respObj.domains[domain] = { errors: errorObj };
                             httpResp.status(400).json(respObj);
-                            
+
                         })
             }
 
