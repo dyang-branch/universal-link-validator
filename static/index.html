@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Universal Links Validator | Branch</title>
+    <title>AASA Validator | Branch</title>
 
     <meta name="keywords" content="Universal links, universal links checker, universal links validator, apple-app-site-association">
     <meta name="description" content="Branch’s Universal Links Validator analyzes your site to check if your apple-app-site-association is properly hosted for Universal Links.">
@@ -48,7 +48,7 @@
   </script>
   <script>
     function recordUser(){
-      try { 
+      try {
         __adroll.record_user({"adroll_segments": "15884d16"})
       }
       catch(err) { console.log(err); }
@@ -72,11 +72,13 @@
     <main class="ng-scope" ng-view>
       <div class="container">
         <div class="well form-horizontal col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-          <div class="validator-title">Universal Links Validator</div>
+          <div class="validator-title">Apple App Site Association (AASA) Validator</div>
           <p>
-          Enter your domain below to test if your website is properly configured for Universal Links. We’ll test your domain against Apple’s requirements for hosting your Apple App Site Association file along with what we have seen in production that leads to a successful implementation of Universal Links. Properly setting it up is a critical step in ensuring that your Universal Links work properly so you’re able to give your iOS users the best possible experience.  <br/><br/>
-
-          In addition to your domain, enter your Apple App Prefix and Bundle Identifier to validate that the correct values from your project are present. If your apple-app-site-association file is properly formatted, we’ll return it for you. If not, we’ll show you which tests failed or did not run due to a previous failed test.
+          The AASA Validator, formerly the Universal Links Validator, can be used to test if your website is properly configured for Universal Links. We’ll test your domain against Apple’s requirements for hosting your Apple App Site Association file along with what we have seen in production that leads to a successful implementation of Universal Links. Properly setting it up is a critical step in ensuring that your Universal Links work properly so you’re able to give your iOS users the best possible experience. If your AASA validates, and Universal Links are still broken, you can use the
+          <a href="/resources/universal-links"> Universal Links Validator</a>
+          to test your Xcode project configuration.
+          <br/><br/>
+          In addition to your domain, you may also enter your Apple App Prefix and Bundle Identifier to validate that the correct values from your project are present. If your Apple App Site Association file is properly formatted, we’ll return it for you. If not, we’ll show you which tests failed or did not run due to a previous failed test.
           </p>
           <br/><br/>
           <div class="form-group">
