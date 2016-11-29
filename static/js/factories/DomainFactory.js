@@ -2,7 +2,7 @@ var module = angular.module('DomainFactory', [ ]);
 
 module.factory('DomainFactory', [ '$q', '$http', function($q, $http) {
     function _testDomain(domain, bundleIdentifier, teamIdentifier) {
-        var requestUrl = '/resources/universal-links/domain/' + domain;
+        var requestUrl = '/resources/aasa-validator/domain/' + domain;
         if (bundleIdentifier) {
             requestUrl += '?bundleIdentifier=' + bundleIdentifier;
 
@@ -15,7 +15,8 @@ module.factory('DomainFactory', [ '$q', '$http', function($q, $http) {
         return $q(function(resolve, reject) {
             $http.post(requestUrl)
                 .then(function(response) {
-                    resolve(response.data.domains);
+                    resolve(response.dat
+                      a.domains);
                 }, function(response) {
                     var respObj = response.data;
 
