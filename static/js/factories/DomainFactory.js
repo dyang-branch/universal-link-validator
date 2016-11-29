@@ -15,8 +15,7 @@ module.factory('DomainFactory', [ '$q', '$http', function($q, $http) {
         return $q(function(resolve, reject) {
             $http.post(requestUrl)
                 .then(function(response) {
-                    resolve(response.dat
-                      a.domains);
+                    resolve(response.data.domains);
                 }, function(response) {
                     var respObj = response.data;
 
