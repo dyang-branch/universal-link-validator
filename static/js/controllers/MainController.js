@@ -8,6 +8,18 @@ module.controller('MainController', ['$scope', '$location', '$anchorScroll', 'Do
     $scope.filename = '';
     $scope.showresultsvalue = false;
 
+    $scope.init = function() {
+        var domain = $location.search().domain;
+        if(domain) {
+            console.log(domain);
+            $scope.domainInputVal = domain;
+            $scope.beginTest();
+            $scope.scrollTo();
+
+        }
+
+    }
+
     $scope.scrollTo = function() {
         $location.hash('resultsbox');
         $anchorScroll();
