@@ -46,6 +46,9 @@ Also, our tool allows for many more content type headers on the file other than 
 ### Running it
 
 1. Cloning the repository
+
 2. `cd` into the repository
-3. run `npm start`
-4. Wait for the server to start, and then open http://localhost:8000/resources/aasa-validator/ in your web browser.
+
+3. Run `npm start` or `node index.js`
+
+4. Wait for the server to start and then open http://localhost:8000/resources/aasa-validator/ in your web browser.
