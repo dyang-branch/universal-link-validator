@@ -153,6 +153,5 @@ module.controller('MainController', ['$scope', '$location', '$anchorScroll', 'Do
         return JSON.stringify(aasa, null, 4);
     };
 
-
     $scope.init();
 }]);
