@@ -45,10 +45,12 @@ Also, our tool allows for many more content type headers on the file other than 
 
 ### Running it
 
-1. Cloning the repository
+1. Clone the repository
 
-2. `cd` into the repository
+2. Open config.json and update to port to 8000
 
-3. Run `npm start` or `node index.js`
+3. `cd` into the repository
 
-4. Wait for the server to start and then open http://localhost:8000/resources/aasa-validator/ in your web browser.
+4. Run `npm start` or `node index.js`
+
+5. Wait for the server to start and then open http://localhost:8000/resources/aasa-validator/ in your web browser.
