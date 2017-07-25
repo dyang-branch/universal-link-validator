@@ -152,4 +152,7 @@ module.controller('MainController', ['$scope', '$location', '$anchorScroll', 'Do
     $scope.prettyPrintAASA = function(aasa) {
         return JSON.stringify(aasa, null, 4);
     };
+
+
+    $scope.init();
 }]);
