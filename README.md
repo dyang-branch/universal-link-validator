@@ -47,7 +47,7 @@ Also, our tool allows for many more content type headers on the file other than 
 
 1. Clone the repository
 
-2. Open config.json and update to port to 8000
+2. Open config.json and update port to 8000
 
 3. `cd` into the repository
 
