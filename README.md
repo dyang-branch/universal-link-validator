@@ -1,4 +1,4 @@
-##Validate your domain using the [Universal Links Validator](https://branch.io/resources/universal-links/)##
+## Validate your domain using the [Universal Links Validator](https://branch.io/resources/universal-links/) ##
 
 The [first version of this tool](https://github.com/shortstuffsushi/Universal-Link-Validator) was created by Graham, a previous Branch employee. He understood the pain that developers were going through when confirming to Apple's requirements of hosting the apple-app-site-association. Our version of the tool is largely built on his open-source framework, but takes a few more aspects of apple-app-site-association into consideration.
 
