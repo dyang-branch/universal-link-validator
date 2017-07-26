@@ -37,3 +37,20 @@ The original tool used validation rules that were more restrictive. Branch's too
 3. Whether your Xcode project is setup correctly.
 
 Also, our tool allows for many more content type headers on the file other than just application/pkcs7-mime (again this comes from production data).
+
+### Dependencies
+
+1. Install nodejs version 4.2.4 (use npm install n -g to manage multiple node version)
+2. Install npm modules: npm install
+
+### Running it
+
+1. Clone the repository
+
+2. Open config.json and update port to 8000
+
+3. `cd` into the repository
+
+4. Run `npm start` or `node index.js`
+
+5. Wait for the server to start and then open http://localhost:8000/resources/aasa-validator/ in your web browser.
