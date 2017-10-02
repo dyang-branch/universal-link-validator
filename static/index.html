@@ -23,7 +23,9 @@
     <meta name="msapplication-TileColor" content="#65d3f7">
     <meta name="msapplication-TileImage" content="//branch.io/img/favicon/mstile-144x144.png">
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
@@ -31,17 +33,55 @@
   </head>
 
   <body ng-controller="MainController">
-    <nav class="navbar navbar-default navbar-static-top navbar-main">
+    <nav class="navbar navbar-main">
       <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" id="dropdown-trigger" data-toggle="collapse" data-target="#navbar-top" aria-expanded="false">
+            <i class="branch-menu"></i>
+          </button>
           <div class="navbar-brand">
-            <a href="https://branch.io" target="_blank" class="logo-container">
-              <div class="branch-logo"><img src="https://branch.io/img/logo_white.png" alt="BranchMetrics" title="Branch Metrics"></div>
+            <a href="/" class="logo-container">
+              <div class="logo"><img src="https://branch.io/img/logo_white.png" alt="BranchMetrics" title="Branch Metrics" /></div>
             </a>
           </div>
         </div>
+
+        <div class="collapse navbar-collapse" id="navbar-top">
+          <ul class="nav navbar-nav">
+            <li><a onclick="mixpanel.track('MW - Header - Developer');" href="https://developer.branch.io/">Developer</a></li>
+            <li><a onclick="mixpanel.track('MW - Header - Resources');" href="/resources">Marketer</a></li>
+            <li><a onclick="mixpanel.track('MW - Header - Features');" href="/features">Features</a></li>
+            <li><a onclick="mixpanel.track('MW - Header - Support');" href="https://support.branch.io">Support</a></li>
+            <li><a onclick="mixpanel.track('MW - Header - Blog');" href="https://blog.branch.io">Blog</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www2.branch.io/request-a-demo/" onclick="mixpanel.track('MW - Header - Demo');">Request Demo</a></li>
+            <li id="sign-in-button">
+              <a href="https://dashboard.branch.io/login" onclick="mixpanel.track('MW - Header - Sign In');">Sign In</a>
+            </li>
+            <li>
+              <a href="https://dashboard.branch.io/" onclick="mixpanel.track('MW - Header - ' + $(this).find('strong').html())">
+                <script>if (document.cookie.match(new RegExp('(?:^|;)\\s?' + 'branch_loggedin' + '=(.*?)(?:;|$)', 'i'))) { document.write('<strong>Dashboard</strong>'); document.getElementById('sign-in-button').style.display = 'none'; } else { document.write('<strong>Sign Up Free</strong>'); }</script>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
+
+    <!-- Navbar Script -->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#dropdown-trigger').click(function(e){
+          var $elm = $('#navbar-top');
+          if($elm.hasClass('in')){
+            e.stopPropagation();
+            $elm.collapse('hide');
+          }
+        });
+      });
+    </script>
 
     <main class="ng-scope" ng-view>
       <div class="container">
@@ -156,6 +196,77 @@
         <h1 class="text-xs-2">Take the pain out of Universal Links. Start using Branch.</h1>
         <a href="https://dashboard.branch.io/" class="new-button" onclick="recordUser()">Get Started</a>
     </section>
+
+      <div class="footer-inner">
+    <div class="container">
+
+      <div class="col-md-2 col-sm-offset-0 col-md-offset-1">
+        <span class="footer-title"><a class="inherit" href="{{site.url}}/" onclick="mixpanel.track('MW - Footer: Branch');">Branch</a></span>
+        <ul>
+          <li><a href="{{site.url}}/about" onclick="mixpanel.track('MW - Footer: About Us');">About Us</a></li>
+          <li><a href="{{site.url}}/partners" onclick="mixpanel.track('MW - Footer: Partners');">Partners</a></li>
+          <li><a href="https://support.branch.io/support/tickets/new" target="_blank" onclick="mixpanel.track('MW - Footer: Contact Us');">Contact Us</a></li>
+          <li>
+            <a href="{{site.url}}/privacy-policy">Privacy | </a>
+            <a href="{{site.url}}/terms-and-conditions">Terms</a>
+          </li>
+          <li><a href="{{site.url}}/policies/#ad-choices">Ad Choices</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <span class="footer-title"><a class="inherit" href="{{site.url}}/learn" onclick="mixpanel.track('MW - Footer: Learn');">Learn</a></span>
+        <ul>
+          <li><a href="{{site.url}}/what-is-deep-linking" onclick="mixpanel.track('MW - Footer: What is Deep Linking?');">What Is Deep Linking?</a></li>
+          <li><a href="{{site.url}}/resources/#case-studies" onclick="mixpanel.track('MW - Footer: Case Studies');">Case Studies</a></li>
+          <li><a href="{{site.url}}/resources" onclick="mixpanel.track('MW - Footer: Resources');">Resources</a></li>
+          <li><a href="https://blog.branch.io" target="_blank" onclick="mixpanel.track('MW - Footer: Blog');">Blog</a></li>
+          <li><a href="{{site.url}}/press" onclick="mixpanel.track('MW - Footer: Press');">Press</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-2">
+        <span class="footer-title"><a class="inherit" href="{{site.url}}/features" onclick="mixpanel.track('MW - Footer: Product');">Product</a></span>
+        <ul>
+          <li><a href="{{site.url}}/features" onclick="mixpanel.track('MW - Footer: Features');">Features</a></li>
+          <li><a href="{{site.url}}/pricing" onclick="mixpanel.track('MW - Footer: Pricing');">Pricing</a></li>
+          <li><a href="{{site.url}}/how-branch-links-work" onclick="mixpanel.track('MW - Footer: How Links Work');">How Links Work</a></li>
+          <li><a href="https://dev.branch.io/getting-started/supported-standards" target="_blank" onclick="mixpanel.track('MW - Footer: Supported Standards');">Supported Standards</a></li>
+          <li><a href="{{site.url}}/why-branch" onclick="mixpanel.track('MW - Footer: How Branch Differs');">How Branch Differs</a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-md-2">
+        <span class="footer-title">Get Involved</span>
+        <ul>
+          <li><a href="{{site.url}}/strategic-partners" onclick="mixpanel.track('MW - Footer: Strategic Partners');">Strategic Partners</a></li>
+          <li><a href="{{site.url}}/careers" onclick="mixpanel.track('MW - Footer: Careers');">Careers</a></li>
+          <li><a href="http://www.meetup.com/pro/mobilegrowth/" target="_blank" onclick="mixpanel.track('MW - Footer: Meetups');">Meetups</a></li>
+          <li><a href="https://branchoutsf.com" onclick="mixpanel.track('MW - Footer: Branchout');">Branchout Conference</a></li>
+          <li><a href="{{site.url}}/feedback" onclick="mixpanel.track('MW - Footer: Feedback');">Provide Feedback</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-2">
+        <span class="footer-title"><a class="inherit" href="https://dev.branch.io" target="_blank" onclick="mixpanel.track('MW - Footer: Documentation');">Documentation</a></span>
+        <ul>
+          <li><a href="https://start.branch.io" target="_blank" onclick="mixpanel.track('MW - Footer: Get Started');">Get Started</a></li>
+          <li><a href="https://dev.branch.io/getting-started/configuring-links/guide/" target="_blank" onclick="mixpanel.track('MW - Footer: Link Configuration');">Link Configuration</a></li>
+          <li><a href="https://dev.branch.io/getting-started/sdk-integration-guide/" target="_blank" onclick="mixpanel.track('MW - Footer: SDK Integration');">SDK Integration</a></li>
+          <li><a href="https://support.branch.io/support/solutions/folders/6000033099" target="_blank" onclick="mixpanel.track('MW - Footer: FAQ');">FAQ</a></li>
+          <li><a href="https://support.branch.io" target="_blank" onclick="mixpanel.track('MW - Footer: Support');">Support</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <div class="bottom-footer">
+    <div class="container">
+      <div class="col-md-6 text-left">
+        <div class="copyright">&copy; 2017 <span style="font-weight:500">Branch Metrics</span>. All rights reserved.</div><div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
 
     <script src="static/js/factories/DomainFactory.js"></script>
     <script src="static/js/controllers/MainController.js"></script>
