@@ -47,6 +47,49 @@ body {
   /*border-top: 1px solid #eeeeee;*/
   padding: 5px 0 3px 0;
 }
+
+
+@font-face {
+  font-family: 'branch';
+  src: url('./font/branch.eot?24581209');
+  src: url('./font/branch.eot?24581209#iefix') format('embedded-opentype'),
+       url('./font/branch.woff?24581209') format('woff'),
+       url('./font/branch.ttf?24581209') format('truetype'),
+       url('./font/branch.svg?24581209#branch') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="branch-"]:before, [class*=" branch-"]:before {
+  font-family: "branch";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
   
 .question-row.see-all {
   font-size: 13px;
@@ -524,4 +567,224 @@ section.section-get-started .new-button{
 section.section-get-started .new-button:hover{
   background-color: #065f74;
   color: #fff;
+}
+
+/*} Footer ------------------------------------------------------------------------------------------------------------------------------------*/
+footer{
+  font-size:14px;
+}
+
+.footer-inner{
+  width:100%;
+  padding:50px 0px 30px 0px;
+  background:#333e48;
+}
+
+.footer-inner ul {
+  margin:0px;
+  padding:10px 0px 0px 0px;
+  list-style: none;
+}
+
+.footer-inner li {
+  margin:5px 0px 0px 0px;
+  list-style: none;
+  font-weight:100;
+  font-size:1.1em;
+}
+
+.footer-inner a {
+  color:#FFF;
+}
+
+.footer-title {
+  color:#FFF;
+  font-size:1.1em;
+  font-weight:bold;
+}
+
+.bottom-footer {
+  width:100%;
+  background:#222;
+  padding:20px 0px;
+  color:#DDD;
+  font-weight:100;
+}
+
+.social-media {
+  display:inline-block;
+  width:32px;
+  height:32px;
+  border:2px solid rgba(255,255,255,0.3);
+  color:#FFF;
+  border-radius:16px;
+  text-align:center;
+  font-size:19px;
+  line-height:28px;
+  margin:0px 4px 0px 4px;
+  opacity:0.6;
+  padding-top:1px;
+}
+.social-media:hover {
+  opacity:1;
+  border:2px solid rgba(255,255,255,0.5);
+}
+
+.copyright {
+  display:inline-block;
+  height:32px;
+  line-height:32px;
+}
+
+/* Navbar ---------------------------------------------------------------*/
+
+header.navbar-container {
+	height:57px;
+}
+
+@media (max-width:$screen-sm-max) {
+	header.navbar-container {
+		height:57px;
+	}
+}
+
+nav.navbar-main {
+
+	background-color:#222;
+	position:fixed;
+	width:100%;
+	z-index:99;
+	border-radius:0;
+}
+
+.navbar-brand {
+	height:40px;
+	padding:8px 30px 0 15px;
+}
+
+.logo-container, .logo-container:hover {
+	height:40px;
+}
+
+.logo img {
+	max-height: 40px;
+}
+
+.navbar-nav a {
+	color: #ffffff;
+	margin:0;
+	font-size: 1.2em;
+	background: none;
+}
+
+.navbar-nav a:hover {
+	color: #2AADCC;
+}
+
+@media (min-width: 992px) {
+	nav.navbar-main {
+		-webkit-transition:0.25s all linear;
+		-moz-transition:0.25s all linear;
+		-o-transition:0.25s all linear;
+		-ms-transition:0.25s all linear;
+		transition:0.25s all linear;
+	}
+	.navbar-brand {
+		padding-top:0;
+	}
+	.logo-container {
+		height: 50px;
+	}
+	.logo {
+		-webkit-transition:0.25s all linear;
+		-moz-transition:0.25s all linear;
+		-o-transition:0.25s all linear;
+		-ms-transition:0.25s all linear;
+		transition:0.25s all linear;
+	}
+	.logo img {
+		margin-top:8px;
+		max-height:40px;
+	}
+
+	.navbar-nav a {
+		font-size: 13px;;
+		-moz-transition: all .2s ease-in;
+		-o-transition: all .2s ease-in;
+		-webkit-transition: all .2s ease-in;
+		transition: all .2s ease-in;
+	}
+
+	a.button-sign-up {
+		margin-top:6px;
+		padding:8px 25px;
+		border:1px solid #ffffff;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		transition:all 250ms;
+	}
+	a.button-sign-up:hover {
+		color:#ffffff;
+		background-color:#2AADCC;
+		border:1px solid #2AADCC;
+	}
+
+	a.button-sign-up {
+		color:#ffffff;
+		background-color:#2AADCC;
+		border:1px solid #2AADCC;
+		transition:all 250ms;
+	}
+
+	a.button-sign-up:hover {
+		background-color:#22BEE2;
+		border:1px solid #22BEE2;
+	}
+}
+
+/* Navbar Collapse -------------------------------------------------- */
+@media (max-width: 992px) {
+	.navbar-header {
+		float: none;
+	}
+	.navbar-left,.navbar-right {
+		float: none !important;
+	}
+	.navbar-toggle {
+		display: block;
+	}
+	.navbar-collapse {
+		border-top: 1px solid transparent;
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+	}
+	.navbar-fixed-top {
+		top: 0;
+		border-width: 0 0 1px;
+	}
+	.navbar-collapse.collapse {
+		display: none!important;
+	}
+	.navbar-nav {
+		float: none!important;
+		margin-top: 7.5px;
+	}
+	.navbar-nav>li {
+		float: none;
+	}
+	.navbar-nav>li>a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.collapse.in{
+		display:block !important;
+	}
+	.navbar-toggle {
+		color:#FFF;
+		text-align:center;
+		font-size:28px;
+		line-height:39px;
+		padding:4px;
+		margin:0;
+	}
 }
