@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "bluebird": "^2.9.34",
-    "express": "~4.13.3",
+    "express": "^4.13.4",
     "extract-zip": "^1.0.3",
     "jade": "~1.11.0",
     "multer": "^1.0.3",
