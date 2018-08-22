@@ -1,2 +1,5 @@
 node_modules
 .DS_Store
+
+# circleci 2.0
+!.circleci/config.yml
