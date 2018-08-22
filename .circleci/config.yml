@@ -19,6 +19,11 @@ jobs:
     - run:
         name: Run Tests
         command: echo "No tests == No Fails"
+    - run: mkdir -p workspace && cp -R ~/docker-build workspace/
+    - persist_to_workspace:
+        root: workspace
+        paths:
+          - docker-build
   deploy:
     machine: true
     working_directory: ~/universal-link-validator
