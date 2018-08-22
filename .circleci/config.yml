@@ -1,9 +1,7 @@
 version: 2
 jobs:
   build:
-    machine:
-      node:
-        version: 4.2.4
+    machine: true
     working_directory: ~/universal-link-validator
     environment:
       BRANCH_STACK: node
