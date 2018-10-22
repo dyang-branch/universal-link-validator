@@ -34,7 +34,17 @@ app.post('/resources/aasa-validator/domain/:domain', function (httpReq, httpResp
             httpResp.status(200).json(respObj);
         })
         .catch(function(errorObj) {
-            if(errorObj.serverError || errorObj.errorOutOfScope || errorObj.badDns || errorObj.httpsFailure){
+            
+            //check if AASA file exists in the root domain 
+            var noFile = false;
+            try {
+                fs.accessSync(fileUrl);
+            } catch (e) {
+                console.log('file does not exist in the root. checking .well-known')
+                noFile = true;
+            }
+
+            if(errorObj.serverError || errorObj.errorOutOfScope || errorObj.badDns || errorObj.httpsFailure || noFile){
                     fileUrl = 'https://' + cleanedDomain + '/.well-known/apple-app-site-association';
                     return checkDomain(fileUrl,bundleIdentifier,teamIdentifier)
                         .then(function(results){
